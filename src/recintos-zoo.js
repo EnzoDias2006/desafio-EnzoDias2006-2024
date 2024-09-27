@@ -19,7 +19,6 @@ class RecintosZoo {
   }
 
   analisaRecintos(animal, quantidade) {
-    // Validação de entradas
     if (!this.animaisInfo[animal]) {
       return { erro: "Animal inválido" };
     }
@@ -49,12 +48,10 @@ class RecintosZoo {
           if (infoAnimalExistente.carnivoro) temCarnivoro = true;
         });
 
-        // Regras de compatibilidade
         if (carnivoro && (temOutraEspecie || temCarnivoro)) return false;
         if (animal === "HIPOPOTAMO" && temOutraEspecie && recinto.bioma !== "savana e rio") return false;
         if (animal === "MACACO" && recinto.animais.length === 0 && quantidade === 1) return false;
 
-        // Considerar espaço extra se houver múltiplas espécies
         if (temOutraEspecie) espacoOcupado += 1;
 
         const espacoLivre = recinto.tamanho - espacoOcupado;
@@ -67,10 +64,9 @@ class RecintosZoo {
           espacoOcupado += infoAnimalExistente.tamanho * animalExistente.quantidade;
         });
 
-        // Calcula o espaço livre após adicionar os novos animais
         let espacoLivre = recinto.tamanho - espacoOcupado;
         if (recinto.animais.length > 0) {
-          espacoLivre -= 1; // Espaço extra quando há múltiplas espécies
+          espacoLivre -= 1; 
         }
         espacoLivre -= espacoNecessario;
 
